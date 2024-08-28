@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# exit immediately if a command exits with a non-zero status
+set -e
+
+#where we will store the files
+OUTPUT_DIR="/tmp/s3_bash_script/"
+
+#remove folder if it exists
+rm -r $OUTPUT_DIR
+
+#let create a output folder
+mkdir -p $OUTPUT_DIR
+
+# Generate a random number between 5 and 10
+num_files=$((RANDOM % 6 + 5))
+
+# Loop to create the random files
+for ((i = 1; i <= num_files; i++)); do
+  # Generate a random filename
+  filename="$OUTPUT_DIR/random_file_$i.txt"
+
+  # Generate a random data and write it to the file
+  dd if=/dev/urandom of="$filename" bs=1024 count=1024
+
+  tree $OUTPUT_DIR
+
+
+  
+done
