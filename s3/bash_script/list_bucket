@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo "s3 list_buckets"
+
+aws s3 ls

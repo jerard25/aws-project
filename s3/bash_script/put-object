@@ -23,8 +23,8 @@ for ((i = 1; i <= num_files; i++)); do
   # Generate a random data and write it to the file
   dd if=/dev/urandom of="$filename" bs=1024 count=1024
 
-  tree $OUTPUT_DIR
-
-
   
 done
+
+  tree $OUTPUT_DIR
+  #./s3/bash_script/put-object your-bucket-name

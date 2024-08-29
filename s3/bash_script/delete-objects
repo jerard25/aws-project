@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Check if a bucket name is provided
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 <bucket-name>"
+    exit 1
+fi
+
+bucket_name=$1
+
+# Get the list of all objects in the bucket and store their keys in a variable
+objects=$(aws s3api list-objects --bucket "$bucket_name" --query "Contents[].{Key: Key}" --output json)
+
+# Check if there are objects in the bucket
+if [ "$objects" == "[]" ]; then
+    echo "No objects found in the bucket $bucket_name."
+    exit 0
+fi
+
+# Prepare the delete.json file with the list of objects
+echo '{"Objects":' > delete.json
+echo "$objects" >> delete.json
+echo ', "Quiet": false}' >> delete.json
+
+# Delete the objects in the bucket
+aws s3api delete-objects --bucket "$bucket_name" --delete file://delete.json
+
+# Clean up the delete.json file
+rm delete.json
+
+echo "All objects in the bucket $bucket_name have been deleted."

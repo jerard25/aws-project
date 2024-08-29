@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-//check at least 1 argument is provided to the script bash script
+#check at least 1 argument is provided to the script bash script
 if [ $# -lt 1 ]; then
     echo "no argument provided>"
     exit 1
 fi
-//check if the first argument is provided
+#check if the first argument is provided
 if [ -z "$1" ]; then
     echo "no first argument provided>"
     exit 1
 fi
 
 
-aws s3api create-bucket --bucket $1
+aws s3api create-bucket --bucket $1 --region us-east-1
 
