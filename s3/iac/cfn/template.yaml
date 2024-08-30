@@ -1,0 +1,9 @@
+
+AWSTemplateFormatVersion: "2010-09-09"
+Description: A sample template for an S3 bucket
+#https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-s3-bucket.html
+
+Resources:
+  S3Bucket:
+    Type: "AWS::S3::Bucket"
+    DeletionPolicy: "Retain"
